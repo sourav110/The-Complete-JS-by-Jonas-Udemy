@@ -1,0 +1,448 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>JavaScript by Jonas</title>
+    </head>
+    
+    <body>
+        <h1>JavaScripts Basics</h1>
+        <script>
+            /*
+            
+            //Type Coercion
+            var firstName = "Srabani";
+            var age = 24;
+            console.log(firstName + " is " + age + " years old.");
+            
+            var job, isEmployeed;
+            job = "Graphics Designer";
+            isEmployeed = true;
+            console.log(firstName + " is " + age + " years old and She is a " + job);
+            
+            
+            //Variable Mutation
+            age = "twenty four"
+            console.log(firstName + " is " + age + " years old.");
+            
+            var lastName = prompt("Her last name: ");
+            alert(firstName + " " + lastName);
+            
+            
+            //Operator Precedence
+            var a, b;
+            b = a= 4 + (3 * 2);
+            console.log(a, b);
+            
+            
+            // Coding challenge 1 - BMI = mass / height^2
+            
+            var massSourav, massSrabani, heightSourav, heightSrabani;
+            massSourav = 50; //in KG
+            massSrabani = 55;
+            heightSourav = 5; //in inch
+            heightSrabani = 4;
+            
+            var bmiSourav, bmiSrabani;
+            bmiSourav = massSourav / (heightSourav * heightSourav);
+            bmiSrabani = massSrabani / (heightSrabani * heightSrabani);
+            
+            var isHighter = bmiSourav > bmiSrabani;
+            
+            console.log(bmiSourav);
+            console.log(bmiSrabani);
+            console.log("Is BMI of Sourav is Higher than Srabani? " + isHighter);
+            
+            
+            //if-else statement 
+            var name = "Sourav";
+            var isEmployeed = false;
+            
+            if(isEmployeed){
+                console.log(name + " is Employeed.");
+            }
+            else{
+                console.log(name + " will get the JOB soon!");
+            }
+            
+            
+            
+            //Ternary operator
+            var name = "Sourav";
+            age = 24;
+            
+            age >= 18 ? console.log(name + " can drink beer.") : console.log(name + " please drink juice");
+            
+            var drink = age >= 18 ? "Beer" : "Juice";
+            console.log(drink);
+            
+            
+            //Switch Statement
+            var name = "Sourav";
+            var job = "teacher";
+            
+            switch(job){
+                case "teacher" : 
+                    console.log(name + " teaches students");
+                    break;
+                    
+                case "developer" : 
+                    console.log(name + " designs websites");
+                    break;
+                    
+                case "driver" : 
+                    console.log(name + " drives uber in Dhaka");
+                    break;
+                    
+                default:
+                    console.log(name + " does something else");
+            }
+            
+            
+            //if-else to switch
+            var age = 30;
+            
+            switch(true){
+                case age < 13:
+                    console.log(name + " is a boy!");
+                    break;
+                    
+                case age >= 13 && age < 20:
+                    console.log(name + " is a teenager.");
+                    break;
+                    
+                case age >= 20 && age < 30 :
+                    console.log(name + " is a young man.");
+                    break;
+                    
+                default:
+                    console.log(name + " is a Man!");
+                    
+            }
+            
+            //Falsy-Truthy valuse
+            var height = 0;
+            
+            if(height){
+                console.log("Defined");
+            }
+            else{
+                console.log("NOT defined");
+            }
+            
+            
+            
+            //Coding Challenge 2
+            var avgJohnTeam = (89 + 120 + 103) / 3;
+            var avgMikeTeam = (116 + 94 + 123) /3;
+            var avgMarryTeam = (95 + 134 + 104) / 3;
+            
+            console.log("Average Score of John's Team: " + avgJohnTeam);
+            console.log("Average Score of Mike's Team: " + avgMikeTeam);
+            console.log("Average Score of Marry's Team: " + avgMarryTeam);
+            
+            if((avgJohnTeam > avgMikeTeam) && (avgJohnTeam > avgMarryTeam)){
+                console.log("Winner is John's Team with highest average score of " + avgJohnTeam);
+            }
+            
+            else if((avgMikeTeam > avgJohnTeam) && (avgMikeTeam > avgMarryTeam)){
+                console.log("Winner is Mike's Team with highest average score of " + avgMikeTeam);
+            }
+            
+            else if((avgMarryTeam > avgJohnTeam) && (avgMarryTeam > avgMikeTeam)){
+                console.log("Winner is Marry's Team with highest average score of " + avgMarryTeam);
+            }
+            
+            else{
+                console.log("There's a Draw");
+            }
+
+            
+            
+            //Functions
+            function CalculateAge(birthYear){
+                return 2020 - birthYear;
+            }
+            
+            var age = CalculateAge(1994);
+            console.log(age);
+            
+            function YearsToRetire(year, name){
+                var currentAge = CalculateAge(year);
+                var yearsToRetire = 65 - currentAge;
+                
+                if(yearsToRetire > 0){
+                    console.log(name + " remains " + yearsToRetire + " years to retire.");
+                }
+                else{
+                    console.log(name + " already retired.");
+                }
+            }
+            
+            YearsToRetire(1980, "John");
+            YearsToRetire(1975, "Mike");
+            
+            
+            
+            //Arrays
+            var names = ['Sourav', 'Das', 'Srabani'];
+            names[3] = 'Gain';
+            console.log(names);
+
+
+
+            //Coding Challenge - 3
+            function CalculateTip(bill){
+                var tip;
+                if(bill < 50){
+                    tip = bill * (20/100);
+                }
+                
+                else if(bill >= 50 && bill <= 200){
+                    tip = bill * (15/100);
+                }
+                else if(bill > 200){
+                    tip = bill * (10/100);
+                }
+                
+                return tip;
+            }
+            
+            //nooooooob
+            var waiterTipOne = CalculateTip(124);
+            var waiterTipTwo = CalculateTip(48);
+            var waiterTipTheree = CalculateTip(268);
+            
+            console.log(waiterTipOne, waiterTipTwo, waiterTipTheree);
+            
+            
+            //prooooooooo
+            var bills = [124, 48, 268];
+            var tips = [CalculateTip(bills[0]), CalculateTip(bills[1]), CalculateTip(bills[2])];
+            console.log(bills);
+            console.log(tips);
+            
+            var finalPaidBills = [bills[0] + tips[0], bills[1] + tips[1], bills[2] + tips[2]];
+            console.log(finalPaidBills);
+            
+            
+            
+            
+            //Object & Property
+            var sourav = {
+                firstName : "Sourav",
+                lastName : "Das",
+                birthYear : 1995,
+                familyMembers : ["Father", "Mother", "Brother"],
+                isEmployeedYet : false,
+                currentAge : function(birthyear){
+                    //return 2020 - this.birthYear;
+                    return 2020 - birthyear;
+                }
+            }
+            
+            console.log(sourav.familyMembers[2]);
+            console.log(sourav.currentAge(1994));
+
+            //Object syntax
+            var pretam = new Object();
+            pretam.firstName = "Pretam";
+            pretam.lastName = "Das";
+            pretam.age = 18;
+            
+            console.log(pretam);
+            
+            
+            
+            //Coding Challenge - 4
+            var sourav = {
+                fullname : "Sourav Das",
+                height : 5.4,
+                mass : 50,
+                calculateBMI : function (){
+                    this.bmi = this.mass / (this.height * this.height)
+                    return this.bmi;
+                }
+            }
+            
+            var srabani = {
+                fullname : "Srabani Gain",
+                height : 5.2,
+                mass : 55,
+                calculateBMI : function (){
+                    this.bmi = this.mass / (this.height * this.height)
+                    return this.bmi;
+                }
+            }
+            
+            //console.log(sourav.calculateBMI());
+            //console.log(srabani.calculateBMI());
+            sourav.calculateBMI();
+            srabani.calculateBMI();
+            
+            console.log("Sourav bmi : " + sourav.bmi);
+            console.log("Srabani bmi : " + srabani.bmi);
+            
+            if(sourav.bmi > srabani.bmi){
+                console.log("Sourav got higher BMI");
+            }
+            else if(srabani.bmi < srabani.bmi){
+                console.log("Srabani got higher BMI");
+            }
+            else{
+                console.log("They got equal BMI");
+            } //issue
+            
+            
+            
+            //Loop
+            var sourav = ['Sourav', 'Das', 1995, 'Black', false];
+            //console.log(sourav[4]);
+            for(var i = 0; i < sourav.length; i++){
+                console.log(sourav[i]);
+            }
+            
+            
+            //Continue[skip actually] and Break[stop right there]
+            var srabani = ['Srabani', 'Gain', 1996, 'Black', true];
+            for(var i = 0; i < srabani.length; i++){
+                if(typeof srabani[i] !== "string"){
+                    continue;
+                }
+                console.log(srabani[i]);
+            }
+            
+            //Loop backward
+            for(var i = sourav.length - 1; i >= 0; i--){
+                console.log(sourav[i]);
+            }
+
+            */
+            
+            
+            //Coding Challenge - 5
+            //part 1
+            var sourav = {
+                fullName : "Sourav Das",
+                bills : [124, 48, 268, 180, 42],
+                calculateTips : function(){
+                    this.paidTips = [];
+                    this.finalBill = [];
+                    
+                    for(var i = 0; i < this.bills.length; i++){
+                        
+                        var tips;
+                        var bill = this.bills[i];
+                        
+                        if(bill < 50){
+                            tips = bill * .20;
+                        }
+                        else if(bill >= 50 && bill <= 200){
+                            tips = bill * .15;
+                        }
+                        else if(bill > 200){
+                            tips = bill * .10;
+                        }
+                        
+                        this.paidTips[i] = tips;
+                        this.finalBill[i] = bill + tips;
+                    }
+                }
+            }
+            
+            console.log(sourav.fullName);
+            
+            sourav.calculateTips();
+            console.log(sourav)
+
+            //part 2
+            var srabani = {
+                fullName : "Srabani Gain",
+                bills : [77, 275, 110, 45],
+                calculateTips : function(){
+                    this.paidTips = [];
+                    this.finalBill = [];
+                    
+                    for(var i = 0; i < this.bills.length; i++){
+                        
+                        var tips;
+                        var bill = this.bills[i];
+                        
+                        if(bill < 100){
+                            tips = bill * .20;
+                        }
+                        else if(bill >= 100 && bill <= 300){
+                            tips = bill * .10;
+                        }
+                        else if(bill > 300){
+                            tips = bill * .25;
+                        }
+                        
+                        this.paidTips[i] = tips;
+                        this.finalBill[i] = bill + tips;
+                    }
+                }
+            }
+            
+            console.log(srabani.fullName);
+            srabani.calculateTips();
+            console.log(srabani);
+            
+            
+            function calculateAvgTips(tips){
+                var sum = 0;
+                for(var i = 0; i < tips.length; i++){
+                    sum = sum + tips[i];
+                }
+                
+                var avg = sum / tips.length;
+                return avg;
+            }
+            
+            sourav.averageTips = calculateAvgTips(sourav.paidTips);
+            srabani.averageTips = calculateAvgTips(srabani.paidTips);
+            console.log(sourav.fullName, srabani.fullName);
+            
+            console.log(sourav.averageTips);
+            console.log(srabani.averageTips);
+            
+            if(sourav.averageTips > srabani.averageTips){
+                console.log("Sourav pays higher tips.");
+            }
+            else if(srabani.averageTips > sourav.averageTips){
+                console.log("Srabani pays higher tips.")
+            }
+            else{
+                console.log("They pay equal tips.");
+            }
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+        </script>
+    </body>
+</html>
