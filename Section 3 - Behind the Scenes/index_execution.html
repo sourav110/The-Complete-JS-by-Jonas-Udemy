@@ -1,0 +1,70 @@
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>JavaScript by Jonas</title>
+    </head>
+    
+    <body>
+        <h1>How JavaScript works at behind</h1>
+        <script type="text/javascript">
+            
+            /*
+            //Hoisting [works with function declaration, NOT with funtion expression]
+            calculateAge(1995);
+            function calculateAge(birthYear){
+                console.log(2020 - birthYear);
+            }
+            
+            calcAge(1994);
+            var calcAge = function(birthYear){
+                console.log(2020 - birthYear);
+            }
+            
+            
+            //Scoping - Scope chaining[in hoisting]
+            var a = "Hello ";
+            first();
+            
+            function first(){
+                var b = " Brendon ";
+                second();
+                
+                function second(){
+                    var c = " Calix ";
+                    console.log(a + b + c);
+                    third();
+                }
+            }
+            
+            third();
+            function third(){
+                var d = " David ";
+                console.log(a + d);
+            }
+            */
+            
+            
+            //this Keyword
+            var sourav = {
+                name : "Sourav Das",
+                birthYear : 1994,
+                calculateAge : function(){
+                    console.log(this);
+                    console.log(2020 - this.birthYear);
+                }
+            }
+            
+            sourav.calculateAge();
+
+            //method borrowing
+            var srabani = {
+                name : "Srabani Gain",
+                birthYear : 1996,
+            }
+            srabani.calculateAge = sourav.calculateAge;
+            srabani.calculateAge();
+            
+            
+        </script>
+    </body>
+</html>
