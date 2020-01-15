@@ -42,52 +42,57 @@
         <!---------Javascript Code---------->
         <script type="text/javascript">
         
-            var scores, roundScore, activePlayer;
+            var scores, roundScore, activePlayer, gamePlaying;
             init();
             
             
             document.querySelector('.btn-roll').addEventListener('click', function(){
-                //1. Generating Random Number
-                var dice = Math.floor(Math.random() * 6) + 1;
-                
-                
-                //2. Display the number
-                var diceDOM = document.querySelector('.dice'); 
-                diceDOM.style.display = 'block';
-                diceDOM.src = 'dice-' + dice + '.png';
-                
-                
-                //3. Updating round score if rolled number NOT 1 and changing Player
-                if(dice !== 1){
-                    //Add score
-                    roundScore += dice;
-                    document.querySelector("#current-" + activePlayer).textContent = roundScore;
-                }
-                
-                else{
-                    //Next palyer
-                    nextPlayer();
+                if(gamePlaying){
+                    //1. Generating Random Number
+                    var dice = Math.floor(Math.random() * 6) + 1;
+
+
+                    //2. Display the number
+                    var diceDOM = document.querySelector('.dice'); 
+                    diceDOM.style.display = 'block';
+                    diceDOM.src = 'dice-' + dice + '.png';
+
+
+                    //3. Updating round score if rolled number NOT 1 and changing Player
+                    if(dice !== 1){
+                        //Add score
+                        roundScore += dice;
+                        document.querySelector("#current-" + activePlayer).textContent = roundScore;
+                    }
+
+                    else{
+                        //Next palyer
+                        nextPlayer();
+                    }
                 }
             });
             
             
             document.querySelector('.btn-hold').addEventListener('click', function(){
-                //Add current score to glabal(score)
-                scores[activePlayer] = scores[activePlayer] + roundScore;
-                
-                //update UI
-                document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
-                
-                //check if win
-                if(scores[activePlayer] >= 10){
-                    document.querySelector('#name-' + activePlayer).textContent = "Winner !!!";
-                    document.querySelector('.dice').style.display = 'none';
-                    document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
-                    document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+                if(gamePlaying){
+                    //Add current score to glabal(score)
+                    scores[activePlayer] = scores[activePlayer] + roundScore;
+
+                    //update UI
+                    document.querySelector('#score-' + activePlayer).textContent = scores[activePlayer];
+
+                    //check if win
+                    if(scores[activePlayer] >= 10){
+                        document.querySelector('#name-' + activePlayer).textContent = "Winner !!!";
+                        document.querySelector('.dice').style.display = 'none';
+                        document.querySelector('.player-' + activePlayer + '-panel').classList.add('winner');
+                        document.querySelector('.player-' + activePlayer + '-panel').classList.remove('active');
+                        gamePlaying = false;
+                    }
+
+                    //Next player
+                    nextPlayer();
                 }
-                
-                //Next player
-                nextPlayer();
             });
             
             
@@ -113,6 +118,7 @@
                 scores = [0, 0];
                 roundScore = 0;
                 activePlayer = 0;
+                gamePlaying = true;
 
                 document.querySelector('.dice').style.display = 'none';
 
