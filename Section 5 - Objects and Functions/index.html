@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Section 5 : Advance JS - Objects and Functions</title>
+    </head>
+    
+    <body>
+        <h1>Section 5 : Objects and Functions</h1>
+        <script type="text/javascript">
+            /*
+            //Function Constructor
+            var Person = function(name, birthYear, job){
+                this.Name = name;
+                this.BirthYear = birthYear;
+                this.Job = job;
+            }
+            
+            //Inheritance through "prototype"
+            Person.prototype.city = "Dhaka";
+            Person.prototype.CalculateAge = function(){
+                console.log(2020 - this.BirthYear);
+                //return 2020 - this.BirthYear;
+            }
+            
+            
+            var sourav = new Person("Sourav", 1995, "Software Engineer");
+            var srabani = new Person("Srabani", 1996, "Graphics Designer");
+            
+            console.log(sourav.Name);
+            console.log(srabani.BirthYear);
+            console.log(sourav.city);
+            console.log(srabani.city);
+            sourav.CalculateAge();
+            srabani.CalculateAge();
+            
+            
+            
+            //Object.create
+            
+            var personPrototype = {
+                calculateAge : function(){
+                    console.log(2020 - this.birthYear);
+                }
+            };
+            
+            var sourav = Object.create(personPrototype);
+            sourav.name = "Sourav";
+            sourav.birthYear = 1995;
+            sourav.job = "Software Engineer";
+            
+            
+            
+            //Primitive vs Object
+            var a = 20;
+            var b = a;
+            var a = 30;
+            console.log(a, b);
+            
+            var sourav = {
+                name : "Sourav",
+                age : 25
+            }
+            
+            var srabani = sourav;
+            console.log(srabani.age);
+            srabani.city = "Dhaka";
+            console.log(sourav.city); //that's the diff from primitive
+            
+            
+            
+            
+            //Passing function as argument
+            var birthYears = [1980, 1990, 1995, 2001, 2002];
+            
+            function calculateArray(arr, func){
+                var ages = [];
+                
+                for(var i =0; i < arr.length; i++){
+                    ages.push(func(arr[i]));
+                }
+                
+                return ages;
+            }
+            
+            function calAge(year){
+                return 2020 - year;
+            }
+            
+            function isTeenager(year){
+                return year < 20;
+            }
+            
+            function maxHeartRate(year){
+                if (year >= 20){
+                    return Math.round(206.9 - .67 * year);
+                }
+                else{
+                    return "teenager";
+                }
+            }
+            
+            var ages = calculateArray(birthYears, calAge);
+            console.log(ages);
+            
+            var teenagers = calculateArray(ages, isTeenager);
+            console.log(teenagers);
+            
+            var heartRate = calculateArray(ages, maxHeartRate);
+            console.log(heartRate);
+            
+            
+            
+            
+            //Function returning Function
+            
+            function interviewQuestion(job){
+                if(job === 'Teacher'){
+                    return function(name){
+                        console.log("What do you teach " + name + "?");
+                    }
+                }
+                
+                else if(job === "Player"){
+                    return function(name){
+                        console.log(name + " Which game do you play?");
+                    }
+                }
+                else{
+                    return function(name){
+                        console.log("Hello " + name + ", what do you do?");
+                    }
+                }
+            }
+            
+            var teacherQuestion = interviewQuestion("Teacher");
+            teacherQuestion('Sourav');
+            
+            var anonymousQues = interviewQuestion("Graphics Designer")('Srabani');
+            
+            
+            
+            function detectAge(age){
+                if(age < 20){
+                    return function(name){
+                        console.log(name + ", You're Teenager, Drink Juice");
+                    }
+                }
+                else if(age >= 20 && age <= 45){
+                    return function(name){
+                        console.log(name + ", You're Adult, Drink Beer");
+                    }
+                }
+                else{
+                    return function(name){
+                        console.log(name + ", You're Old, Drink Water");
+                    }
+                }
+            }
+            
+            
+            detectAge(12)('Srabani');
+            detectAge(34)('Sourav');
+            detectAge(50)('Paul');
+            
+            
+            
+            
+            //Immediately Invoked Function Expression
+            
+            //normal function 
+            function game(){
+                var score = Math.round(Math.random() * 10);
+                console.log(score);
+                console.log(score >= 5);
+            }
+            
+            game();
+            
+            //IIFE
+            (function (goodLuck){
+                var score = Math.round(Math.random() * 10);
+                console.log(score);
+                console.log(score >= 5) - goodLuck;
+            })(5); //passing arg
+            
+            
+            
+            //Closure
+            function retirement(retirementAge){
+                var str = " years left to retire." 
+                // str can be accessed by inner function though it is declared outside of that because of closure
+                
+                return function(birthYear){
+                    var age = 2020 - birthYear;
+                    console.log((retirementAge - age) + str);
+                }
+            }
+            
+            //retirement(65)(1995);
+            //retirement(66)(1990);
+            
+            var retirementUS = retirement(66);
+            var retirementBAN = retirement(65);
+            var retirementIceland = retirement(67);
+            
+            retirementUS(1990);
+            retirementBAN(1995);
+            retirementIceland(2000);
+            
+            
+            
+            
+            //Bind, Call, Apply
+            var sourav = {
+                name : "Sourav Das",
+                age : 24,
+                job : "Software Engineer",
+                presentation : function(style, time){
+                    if(style == "formal"){
+                        console.log("Hello, Good " + time + ". I am " + this.name + ". I am " + this.age + " years old and I am a " + this.job);
+                    }
+                    
+                    else if(style == "casual"){
+                        console.log("Hey guys, What's up ! I am " + this.name + ". I am " + this.age + " years old and I am a " + this.job + ". Have a nice " + time);
+                    }
+                    else{
+                        console.log("Hi, what's going on folks ? I'm " + this.name + ". Good " + time);
+                    }
+                }
+            }
+            
+            sourav.presentation("formal", "morning");
+            
+            //call
+            var srabani = {
+                name : "Srabani Gain",
+                age : 23,
+                job : "Graphics Designer"
+            }
+            sourav.presentation.call(srabani, "casual", "afternoon");
+            
+            //bind
+            var souravBind = sourav.presentation.bind(sourav, "none");
+            souravBind("night");
+            souravBind("morning");
+            
+            var srabaniBind = sourav.presentation.call(srabani, "casual");
+            srabaniBind("noon");
+            
+            */
+            
+            
+            //Coding Challenge - 7
+            function Question(question, answer, correct){
+                this.Question = question;
+                this.Answer = answer;
+                this.Correct = correct;
+            }
+            
+            Question.prototype.displayQuestion = function() {
+                console.log(this.Question);
+                for(var i = 0; i < this.Answer.length; i++){
+                    console.log(i + " : " + this.Answer[i]);
+                }
+            }
+            
+            Question.prototype.checkAnswer = function(ans, callback){
+                var sc;
+                
+                if(ans === this.Correct){
+                    console.log("CORRECT! Congrats.");
+                    sc = callback(true);
+                }
+                else{
+                    console.log("WRONG! Try again.");
+                    sc = callback(false);
+                }
+                
+                this.displayScore(sc);
+            }
+            
+            Question.prototype.displayScore = function(score){
+                console.log("Your current score is : " + score);
+                console.log("--------------------------");
+            }
+            
+            var q1 = new Question("What is the capital of Bangladesh?", ["Dhaka", "Khulna"], 0);
+            var q2 = new Question("What is the captain of Bayern Munich?", ["Marco Rues", "Manuel Neuer"], 1);
+            var q3 = new Question("Who are the champions of FIFAWC 2014?", ["Germany", "Russia", "France"], 0);
+            
+            var questions = [q1, q2, q3];
+            
+            function score(){
+                var sc = 0;
+                return function(correct){
+                    if(correct){
+                        sc++;
+                    }
+                    return sc;
+                }
+            }
+            
+            var keepScore = score();
+            
+            function nextQuestion(){
+                var n = Math.floor(Math.random() * questions.length);
+                questions[n].displayQuestion();
+            
+                var answer = prompt("What is the correct option?");
+                
+                if(answer !== "exit"){
+                    questions[n].checkAnswer(parseInt(answer), keepScore);
+                    nextQuestion();
+                }
+            }
+            
+            nextQuestion();
+            
+            
+        </script>
+    </body>
+</html>
